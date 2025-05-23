@@ -1,131 +1,68 @@
-/**
- * Sample React Native App
- * https://github.com/facebook/react-native
- *
- * @format
- */
+import React, {Fragment, useEffect, useState} from 'react';
+import {LogBox, Platform, SafeAreaView, StatusBar} from 'react-native';
+import KeyboardManager from 'react-native-keyboard-manager';
+import {NavigationContainer} from '@react-navigation/native';
+import {navigationContainerRef} from './src/navigation/RootStack/helpers';
+// screen
+import {Colors} from './src/utils/theme';
+import RootStack from './src/navigation/RootStack';
 
-import React from 'react';
-import type {PropsWithChildren} from 'react';
-import {
-  ScrollView,
-  StatusBar,
-  StyleSheet,
-  Text,
-  useColorScheme,
-  View,
-} from 'react-native';
+export default function App() {
+    const [routeName, setRouteName] = useState('');
+    // Variables
+    useEffect(() => {
+        LogBox.ignoreAllLogs();
+        if (Platform.OS === 'ios') {
+            KeyboardManager.setEnable(true);
+            KeyboardManager.setEnableDebugging(true);
+            KeyboardManager.setKeyboardDistanceFromTextField(15);
+            KeyboardManager.setLayoutIfNeededOnUpdate(true);
+            KeyboardManager.setEnableAutoToolbar(true);
+            KeyboardManager.setToolbarDoneBarButtonItemText('Done');
+            KeyboardManager.setShouldToolbarUsesTextFieldTintColor(false);
 
-import {
-  Colors,
-  DebugInstructions,
-  Header,
-  LearnMoreLinks,
-  ReloadInstructions,
-} from 'react-native/Libraries/NewAppScreen';
+            KeyboardManager.setToolbarManageBehaviourBy('position'); // "subviews" | "tag" | "position"
+            KeyboardManager.setToolbarPreviousNextButtonEnable(true);
 
-type SectionProps = PropsWithChildren<{
-  title: string;
-}>;
+            KeyboardManager.setToolbarTintColor(Colors.themeColor); // Only #000000 format is supported
+            KeyboardManager.setToolbarBarTintColor(Colors.background); // Only #000000 format is supported
+            KeyboardManager.setShouldShowToolbarPlaceholder(false);
+            KeyboardManager.setOverrideKeyboardAppearance(true);
+            KeyboardManager.setShouldResignOnTouchOutside(true);
+            KeyboardManager.setKeyboardAppearance('light'); // "default" | "light" | "dark"
+            KeyboardManager.resignFirstResponder();
+            KeyboardManager.setShouldPlayInputClicks(true);
+            KeyboardManager.reloadLayoutIfNeeded();
+            KeyboardManager.isKeyboardShowing().then((isShowing) => {
+                // ...
+                console.log('isShowing', isShowing);
+            });
+        }
+        // Clean up the subscription when the component unmounts
+        return () => {
+            navigationContainerRef.current?.removeListener('state', handleNavigationStateChange);
+        };
+    }, []);
 
-function Section({children, title}: SectionProps): React.JSX.Element {
-  const isDarkMode = useColorScheme() === 'dark';
-  return (
-    <View style={styles.sectionContainer}>
-      <Text
-        style={[
-          styles.sectionTitle,
-          {
-            color: isDarkMode ? Colors.white : Colors.black,
-          },
-        ]}>
-        {title}
-      </Text>
-      <Text
-        style={[
-          styles.sectionDescription,
-          {
-            color: isDarkMode ? Colors.light : Colors.dark,
-          },
-        ]}>
-        {children}
-      </Text>
-    </View>
-  );
+    const handleNavigationStateChange = () => {
+        const route = navigationContainerRef.getCurrentRoute()?.name;
+        if (route) {
+            setRouteName(route);
+        }
+    };
+
+    // render Methods
+    return (
+        <Fragment>
+            <>
+                <StatusBar backgroundColor={Colors.white} barStyle={'dark-content'} />
+            </>
+                <NavigationContainer
+                    ref={navigationContainerRef}
+                    onStateChange={handleNavigationStateChange}
+                >
+                    <RootStack />
+                </NavigationContainer>
+        </Fragment>
+    );
 }
-
-function App(): React.JSX.Element {
-  const isDarkMode = useColorScheme() === 'dark';
-
-  const backgroundStyle = {
-    backgroundColor: isDarkMode ? Colors.darker : Colors.lighter,
-  };
-
-  /*
-   * To keep the template simple and small we're adding padding to prevent view
-   * from rendering under the System UI.
-   * For bigger apps the recommendation is to use `react-native-safe-area-context`:
-   * https://github.com/AppAndFlow/react-native-safe-area-context
-   *
-   * You can read more about it here:
-   * https://github.com/react-native-community/discussions-and-proposals/discussions/827
-   */
-  const safePadding = '5%';
-
-  return (
-    <View style={backgroundStyle}>
-      <StatusBar
-        barStyle={isDarkMode ? 'light-content' : 'dark-content'}
-        backgroundColor={backgroundStyle.backgroundColor}
-      />
-      <ScrollView
-        style={backgroundStyle}>
-        <View style={{paddingRight: safePadding}}>
-          <Header/>
-        </View>
-        <View
-          style={{
-            backgroundColor: isDarkMode ? Colors.black : Colors.white,
-            paddingHorizontal: safePadding,
-            paddingBottom: safePadding,
-          }}>
-          <Section title="Step One">
-            Edit <Text style={styles.highlight}>App.tsx</Text> to change this
-            screen and then come back to see your edits.
-          </Section>
-          <Section title="See Your Changes">
-            <ReloadInstructions />
-          </Section>
-          <Section title="Debug">
-            <DebugInstructions />
-          </Section>
-          <Section title="Learn More">
-            Read the docs to discover what to do next:
-          </Section>
-          <LearnMoreLinks />
-        </View>
-      </ScrollView>
-    </View>
-  );
-}
-
-const styles = StyleSheet.create({
-  sectionContainer: {
-    marginTop: 32,
-    paddingHorizontal: 24,
-  },
-  sectionTitle: {
-    fontSize: 24,
-    fontWeight: '600',
-  },
-  sectionDescription: {
-    marginTop: 8,
-    fontSize: 18,
-    fontWeight: '400',
-  },
-  highlight: {
-    fontWeight: '700',
-  },
-});
-
-export default App;
