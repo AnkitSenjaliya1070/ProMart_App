@@ -15,7 +15,7 @@ export const SlideWrapper = styled.View`
 export const SlideImage1 = styled.Image`
   width: 100%;
   height: ${Responsive.heightPercentageToDP(25)}px;
-  /* resize-mode: cover; */
+  resize-mode: cover;
 `;
 
 export const CategoryGridContainer = styled.View`
@@ -56,15 +56,36 @@ export const SwiperContainer1 = styled.View`
 export const SwiperContainer = styled.View`
   padding-horizontal: ${Responsive.widthPercentageToDP(3)}px;
   width: 100%;
-  aspect-ratio: 3.5;
+  aspect-ratio: 4;
+  overflow: hidden;
+`;
+
+export const SwiperContainer2 = styled.View`
+  padding-horizontal: ${Responsive.widthPercentageToDP(3)}px;
+  width: 100%;
+  aspect-ratio: 5;
+  overflow: hidden;
+`;
+
+export const SwiperContainer3 = styled.View`
+  padding-horizontal: ${Responsive.widthPercentageToDP(3)}px;
+  width: 100%;
+  aspect-ratio: 4.3;
+  overflow: hidden;
+`;
+
+export const SwiperContainer4 = styled.View`
+  padding-horizontal: ${Responsive.widthPercentageToDP(3)}px;
+  width: 100%;
+  aspect-ratio: 5;
   overflow: hidden;
 `;
 
 export const SlideImage = styled.Image`
   width: 100%;
   height: 100%;
-  resize-mode: cover;
-  border-radius: ${Responsive.widthPercentageToDP(2)}px;
+  /* resize-mode: cover; */
+  border-radius: ${Responsive.widthPercentageToDP(1)}px;
 `;
 
 export const MainLabel = styled.Text`
@@ -101,7 +122,6 @@ export const GroceryLabel = styled.Text`
 
 export const MainCatView = styled.View`
   padding-horizontal: ${Responsive.heightPercentageToDP(2)}px;
-  /* padding-bottom: ${Responsive.heightPercentageToDP(3)}px; */
 `;
 
 export const MainCatViewRow = styled.View`
@@ -317,6 +337,57 @@ export const ProductImage = styled.Image`
   width: 100%;
   height: ${Responsive.heightPercentageToDP(10)}px;
   border-radius: ${Responsive.widthPercentageToDP(2)}px;
+`;
+
+export const Row = styled.View`
+  flex-direction: row;
+  flex-wrap: nowrap;
+  justify-content: space-between;
+  padding-horizontal: ${Responsive.widthPercentageToDP(4)}px;
+`;
+
+export const Card = styled.TouchableOpacity`
+  width: ${Responsive.widthPercentageToDP(23)}px;
+  height: ${Responsive.widthPercentageToDP(26)}px;
+`;
+
+export const StyledImage = styled.Image`
+  width: ${Responsive.widthPercentageToDP(23)}px;
+  height: ${Responsive.widthPercentageToDP(26)}px;
+`;
+
+export const TextBox = styled.View`
+  background-color: ${Colors.white};
+  padding: ${Responsive.widthPercentageToDP(1)}px;
+  align-items: center;
+  z-index: 10;
+`;
+
+export const Title = styled.Text`
+  font-size: ${Responsive.convertFontScale(8)}px;
+  font-weight: 500;
+  text-align: center;
+`;
+
+export const Subtitle = styled.Text`
+  font-size: ${Responsive.convertFontScale(8)}px;
+  margin-top: ${Responsive.widthPercentageToDP(0.5)}px;
+`;
+
+export const Strike = styled.Text`
+font-size: ${Responsive.convertFontScale(8)}px;
+  text-decoration: line-through;
+`;
+
+export const ScrollContainer = styled.ScrollView`
+  padding: ${Responsive.widthPercentageToDP(4)}px;
+  flex-direction: row;
+`;
+
+export const BannerImage = styled.Image`
+  width: ${Responsive.widthPercentageToDP(65)}px;
+  height: ${Responsive.widthPercentageToDP(40)}px;
+  margin-right: ${Responsive.widthPercentageToDP(1)}px;
 `;
 
 export const styles = StyleSheet.create({

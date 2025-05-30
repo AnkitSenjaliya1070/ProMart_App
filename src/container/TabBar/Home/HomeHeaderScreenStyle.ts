@@ -1,6 +1,6 @@
 import {StyleSheet} from 'react-native';
 import styled from 'styled-components/native';
-import {Colors, Fonts, Responsive} from '../../../utils/theme';
+import {Colors, Responsive} from '../../../utils/theme';
 
 export const HeaderContainer = styled.View`
   padding-horizontal: ${Responsive.widthPercentageToDP('4')}px;
@@ -13,6 +13,11 @@ export const TopRow = styled.View`
 `;
 
 export const LogoWrapper = styled.View`
+  width: 50%;
+  justify-content: center;
+`;
+
+export const LogoWrapperNearMe = styled.TouchableOpacity`
   width: 50%;
   justify-content: center;
 `;
@@ -33,22 +38,9 @@ export const LocationIcon = styled.Image`
   height: ${Responsive.widthPercentageToDP('7')}px;
 `;
 
-export const LocationText = styled.Text`
-  font-size: ${Responsive.convertFontScale(14)}px;
-  font-weight: 500;
-  margin-left: ${Responsive.widthPercentageToDP(2)}px;
-`;
-
-export const LocationSubText = styled.Text`
-  font-size: ${Responsive.convertFontScale(12)}px;
-  font-family: ${Fonts.ThemeRegular};
-  margin-left: ${Responsive.widthPercentageToDP(1)}px;
-`;
-
 export const DownArrowImage = styled.Image`
-width: ${Responsive.widthPercentageToDP(3)}px;
-margin-left: ${Responsive.widthPercentageToDP(3)}px;
-  resize-mode: contain;
+  width: ${Responsive.widthPercentageToDP(3)}px;
+  margin-left: ${Responsive.widthPercentageToDP(3)}px;
 `;
 
 export const styles = StyleSheet.create({
@@ -66,4 +58,7 @@ export const styles = StyleSheet.create({
     // borderRadius: 0,
     borderColor: Colors.grayC7,
   },
+  textMargin:{
+    marginLeft: Responsive.widthPercentageToDP(2)
+  }
 });

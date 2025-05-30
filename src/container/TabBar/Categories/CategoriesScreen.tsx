@@ -1,8 +1,33 @@
-import React, { useState } from 'react';
-import {Text, TouchableOpacity, View} from 'react-native';
-import { Item, ItemImage, ItemsRow, ItemText, LeftSideBar, LeftSidebarImage, LeftSidebarItem, LeftSidebarText, LeftView, MainView, RedSelectedBar, RightSideBar, Screen, Section, SectionHeader, SectionLine, SectionTitle, SidebarItemSeparator } from './CategoriesScreenStyle';
+import React, {useState} from 'react';
+import {TouchableOpacity} from 'react-native';
+import {
+  Item,
+  ItemImage,
+  ItemsRow,
+  LeftSideBar,
+  LeftSidebarImage,
+  LeftSidebarItem,
+  LeftView,
+  MainView,
+  RedSelectedBar,
+  RightSideBar,
+  Screen,
+  Section,
+  SectionHeader,
+  SectionLine,
+  SidebarItemSeparator,
+  styles,
+} from './CategoriesScreenStyle';
+import {ParamListBase, useNavigation} from '@react-navigation/native';
+import {NativeStackNavigationProp} from '@react-navigation/native-stack';
+import {Colors, Fonts, Images, Screens} from '../../../utils/theme';
+import TextInputView from '../../../components/TextInputView/TextInputView';
+import {localize} from '../../../functions/commonFunctions';
+import CommonStyles, {
+  SeparatorH,
+  SubTextBlack,
+} from '../../../utils/theme/commonStyle';
 
-// 1. Category data (image URLs are just placeholders)
 const categories = [
   {
     id: '1',
@@ -11,7 +36,15 @@ const categories = [
     sections: [
       {
         title: 'Top Deals',
-        items: [{name: 'Best Sellers', image: 'https://picsum.photos/300/200'}],
+        items: [
+          {name: 'Best Sellers', image: 'https://picsum.photos/300/200'},
+          {name: 'Sarees', image: 'https://picsum.photos/300/200'},
+          {name: 'Westernwear', image: 'https://picsum.photos/300/200'},
+          {name: 'Kids', image: 'https://picsum.photos/300/200'},
+          {name: 'Footwear', image: 'https://picsum.photos/300/200'},
+          {name: 'Beauty', image: 'https://picsum.photos/300/200'},
+          {name: 'Bags & Luggage', image: 'https://picsum.photos/300/200'},
+        ],
       },
     ],
   },
@@ -31,9 +64,6 @@ const categories = [
           {name: 'Men’s Ethnic Sets', image: 'https://picsum.photos/300/200'},
           {name: 'Men’s Blazers', image: 'https://picsum.photos/300/200'},
           {name: 'Men’s Raincoats', image: 'https://picsum.photos/300/200'},
-          {name: 'Men’s Windcheaters', image: 'https://picsum.photos/300/200'},
-          {name: 'Men’s Suit', image: 'https://picsum.photos/300/200'},
-          {name: 'Men’s Fabrics', image: 'https://picsum.photos/300/200'},
         ],
       },
       {
@@ -78,8 +108,8 @@ const categories = [
   },
 ];
 
-
 export default function CategoriesScreen() {
+  const navigation = useNavigation<NativeStackNavigationProp<ParamListBase>>();
 
   const [selectedCategoryId, setSelectedCategoryId] = useState('2');
   const selectedCategory = categories.find(
@@ -88,7 +118,7 @@ export default function CategoriesScreen() {
 
   return (
     <Screen>
-      {/* <TextInputView
+      <TextInputView
         label={''}
         placeholder={localize('PM1')}
         value={''}
@@ -97,7 +127,7 @@ export default function CategoriesScreen() {
         leftIconStyle={CommonStyles.searchIconStyle}
         placeholderStyle={CommonStyles.placeholderStyle}
         style={styles.searchInput}
-      /> */}
+      />
       <MainView>
         {/* Left Section */}
         <LeftView>
@@ -108,9 +138,19 @@ export default function CategoriesScreen() {
               <TouchableOpacity onPress={() => setSelectedCategoryId(item.id)}>
                 <LeftSidebarItem isActive={item.id === selectedCategoryId}>
                   <LeftSidebarImage source={{uri: item.icon}} />
-                  <LeftSidebarText isActive={item.id === selectedCategoryId}>
+                  <SubTextBlack
+                    size={14}
+                    color={
+                      item.id === selectedCategoryId
+                        ? Colors.redED
+                        : Colors.black23
+                    }
+                    fontFamily={Fonts.ThemeRegular}
+                    fontWeight={item.id === selectedCategoryId ? '600' : '400'}
+                    style={CommonStyles.centerText}>
                     {item.name}
-                  </LeftSidebarText>
+                  </SubTextBlack>
+
                   {item.id === selectedCategoryId && <RedSelectedBar />}
                 </LeftSidebarItem>
               </TouchableOpacity>
@@ -124,15 +164,36 @@ export default function CategoriesScreen() {
           {selectedCategory.sections.map((section, index) => (
             <Section key={index}>
               <SectionHeader>
-                <SectionTitle>{section.title}</SectionTitle>
+                <SubTextBlack
+                  size={14}
+                  color={Colors.black}
+                  fontFamily={Fonts.ThemeRegular}
+                  fontWeight={500}>
+                  {section.title}
+                </SubTextBlack>
+                <SeparatorH val={0.5} />
                 <SectionLine />
               </SectionHeader>
 
               <ItemsRow>
                 {section.items.map((item, idx) => (
-                  <Item key={idx}>
+                  <Item
+                    key={idx}
+                    onPress={() =>
+                      navigation.navigate(Screens.ProductScreen, {
+                        categoryName: item.name,
+                      })
+                    }>
                     <ItemImage source={{uri: item.image}} />
-                    <ItemText>{item.name}</ItemText>
+
+                    <SubTextBlack
+                      size={12}
+                      color={Colors.gray59}
+                      fontFamily={Fonts.ThemeRegular}
+                      fontWeight={400}
+                      style={CommonStyles.centerText}>
+                      {item.name}
+                    </SubTextBlack>
                   </Item>
                 ))}
               </ItemsRow>

@@ -1,10 +1,9 @@
 import styled from 'styled-components/native';
-import { Colors, Fonts, Responsive } from '../../../utils/theme';
+import { Colors, Responsive } from '../../../utils/theme';
 import { StyleSheet } from 'react-native';
 
 export const Screen = styled.SafeAreaView`
   flex: 1;
-  background-color: ${Colors.white};
 `;
 
 export const MainView = styled.View`
@@ -13,12 +12,11 @@ export const MainView = styled.View`
 `;
 
 export const LeftView = styled.View`
-  width: ${Responsive.widthPercentageToDP(25)}px;
+  width: ${Responsive.widthPercentageToDP(27)}px;
   background-color: ${Colors.pinkFD};
 `;
 
 export const LeftSideBar = styled.FlatList`
-  
 `;
 
 export const LeftSidebarItem = styled.View`
@@ -26,7 +24,7 @@ export const LeftSidebarItem = styled.View`
   align-items: center;
   justify-content: center;
   position: relative;
-  background-color: ${(props) => (props.isActive ? Colors.white : Colors.transparent)};
+  background-color: ${(props) => (props.isActive ? Colors.grayF5 : Colors.transparent)};
 `;
 
 export const LeftSidebarImage = styled.Image`
@@ -34,13 +32,6 @@ export const LeftSidebarImage = styled.Image`
   width: ${Responsive.widthPercentageToDP(12)}px;
   border-radius: ${Responsive.widthPercentageToDP('10')}px;
   margin-bottom: ${Responsive.heightPercentageToDP('1')}px;
-`;
-
-export const LeftSidebarText = styled.Text`
-  font-size: ${Responsive.convertFontScale(14)}px;
-  color: ${props => (props.isActive ? Colors.redED : Colors.black23)};
-  font-family: ${props => (props.isActive ? Fonts.ThemeBold : Fonts.ThemeRegular)};;
-  text-align: center;
 `;
 
 export const SidebarItemSeparator = styled.View`
@@ -76,13 +67,6 @@ export const SectionHeader = styled.View`
   margin-bottom: ${Responsive.heightPercentageToDP(1)}px;
 `;
 
-export const SectionTitle = styled.Text`
-  font-size: ${Responsive.convertFontScale(14)}px;
-  font-weight: 500;
-  color: ${Colors.black};
-  margin-right: ${Responsive.widthPercentageToDP(2)}px;
-`;
-
 export const SectionLine = styled.View`
   flex: 1;
   height: ${Responsive.heightPercentageToDP(0.1)}px;
@@ -95,13 +79,14 @@ export const SectionLine = styled.View`
 export const ItemsRow = styled.View`
   flex-direction: row;
   flex-wrap: wrap;
-  justify-content: flex-start;
+  /* justify-content: flex-start; */
 `;
 
-export const Item = styled.View`
-  width: ${Responsive.widthPercentageToDP(23)}px;
+export const Item = styled.TouchableOpacity`
+  width: ${Responsive.widthPercentageToDP(22)}px;
   margin-bottom: ${Responsive.heightPercentageToDP(1)}px;
   margin-top: ${Responsive.heightPercentageToDP(1)}px;
+  margin-right: 2px;
   align-items: center;
 `;
 
@@ -111,20 +96,12 @@ export const ItemImage = styled.Image`
   border-radius: ${Responsive.widthPercentageToDP(9)}px;
 `;
 
-export const ItemText = styled.Text`
-  margin-top: ${Responsive.heightPercentageToDP(0.5)}px;
-  font-size: ${Responsive.convertFontScale(12)}px;
-  color: ${Colors.black23};
-  text-align: center;
-  font-family: ${Fonts.ThemeRegular};
-`;
-
-
 export const styles = StyleSheet.create({
   searchInput:{
     height: Responsive.heightPercentageToDP(5),
     alignItems: 'center',
-    borderRadius: 24,
-    marginHorizontal: 18
-  }
-})
+    borderRadius: Responsive.widthPercentageToDP(6),
+    marginHorizontal: Responsive.widthPercentageToDP(3),
+    borderColor: Colors.transparent,
+  },
+});

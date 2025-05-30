@@ -19,13 +19,14 @@ export const TabIcon: React.FC<TabIconProps> = styled.Image<TabIconProps>`
     height: ${Responsive.widthPercentageToDP('6.2')}px;
     tint-color: ${(props) => (props.color ? props.color : Colors.themeColor)};
     resize-mode: contain;
+    margin-top: ${Responsive.heightPercentageToDP(4)}px;
 `;
 
 export const TabText: React.FC<TabTextProps> = styled.Text<TabTextProps>`
     color: ${(props) => (props.color ? props.color : Colors.themeColor)};
     font-family: ${Fonts.ThemeRegular};
     font-size: ${Responsive.convertFontScale('10')}px;
-    /* margin-top: 5px; */
+    margin-top: ${Responsive.heightPercentageToDP(0.5)}px;
     width: ${Responsive.widthPercentageToDP('20')}px;
     text-align: center;
 `;

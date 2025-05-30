@@ -56,6 +56,7 @@ export default function App() {
         <Fragment>
             <>
                 <StatusBar backgroundColor={Colors.white} barStyle={'dark-content'} />
+                {/* <SafeAreaView style={{flex: 0, backgroundColor: Colors.transparent}} /> */}
             </>
                 <NavigationContainer
                     ref={navigationContainerRef}

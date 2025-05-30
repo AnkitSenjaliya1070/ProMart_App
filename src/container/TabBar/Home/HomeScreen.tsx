@@ -1,6 +1,8 @@
 import React from 'react';
 import {FlatList, ScrollView, View} from 'react-native';
 import {
+  BannerImage,
+  Card,
   CategoryCard,
   CategoryGridContainer,
   CategoryImage,
@@ -37,14 +39,24 @@ import {
   ProductsWrapper,
   PromoCard,
   RightArrowImage,
+  Row,
+  ScrollContainer,
   SlideImage,
   SlideImage1,
   SlideWrapper,
   Stars,
   StarView,
+  Strike,
+  StyledImage,
   styles,
+  Subtitle,
   SwiperContainer,
   SwiperContainer1,
+  SwiperContainer2,
+  SwiperContainer3,
+  SwiperContainer4,
+  TextBox,
+  Title,
   ViewAllButton,
   ViewAllText,
   VisualCard,
@@ -250,7 +262,6 @@ const JewellryData = [
   },
 ];
 
-
 const categories1 = [
   {name: 'Refrigerators', image: Images.demo3Image},
   {name: 'Oven & Toasters', image: Images.demo3Image},
@@ -416,8 +427,47 @@ const HealthData = [
   },
 ];
 
-export default function HomeScreen() {
+const data2 = [
+  {
+    id: '1',
+    title: 'Trendy Jeans',
+    originalPrice: '$3499',
+    discountedPrice: '$899',
+    image: Images.demo3Image,
+  },
+  {
+    id: '2',
+    title: 'Trendy Jeans',
+    originalPrice: '$3499',
+    discountedPrice: '$899',
+    image: Images.demo3Image,
+  },
+  {
+    id: '3',
+    title: 'Trendy Jeans',
+    originalPrice: '$3499',
+    discountedPrice: '$899',
+    image: Images.demo3Image,
+  },
+  {
+    id: '4',
+    title: 'Trendy Jeans',
+    originalPrice: '$3499',
+    discountedPrice: '$899',
+    image: Images.demo3Image,
+  },
+];
 
+const promoImages = [
+  Images.demo7Image,
+  Images.demo8Image,
+  Images.demo7Image,
+  Images.demo8Image,
+  Images.demo7Image,
+  Images.demo8Image,
+];
+
+export default function HomeScreen() {
   const renderTopDealItem = ({item}: any) => (
     <DealCard>
       <DealImage source={item.image} resizeMode="cover" />
@@ -524,7 +574,7 @@ export default function HomeScreen() {
             ))}
           </Swiper>
 
-          <Separator val={0.5} />
+          {/* <Separator val={0.5} /> */}
 
           {/* Category Grid Section */}
           <CategoryGridContainer>
@@ -546,7 +596,6 @@ export default function HomeScreen() {
           <Separator val={0.5} />
 
           <SwiperContainer1>
-
             <SlideImage1
               source={Images.demo13Image}
               style={styles.image2Style}
@@ -616,7 +665,11 @@ export default function HomeScreen() {
             />
           </MainCatView>
 
-          <Separator val={1} />
+          <ScrollContainer horizontal showsHorizontalScrollIndicator={false}>
+          {promoImages.map((img, index) => (
+            <BannerImage key={index} source={img} resizeMode="cover" />
+          ))}
+        </ScrollContainer>
 
           <MainCatView>
             <FlatList
@@ -627,6 +680,23 @@ export default function HomeScreen() {
               showsHorizontalScrollIndicator={false}
             />
           </MainCatView>
+
+          <Separator val={1} />
+
+          <Row>
+            {data2.map(item => (
+              <Card key={item.id}>
+                <StyledImage source={item.image}/>
+                <TextBox>
+                  <Title>{item.title}</Title>
+                  <Subtitle>
+                    FLAT <Strike>{item.originalPrice}</Strike>{' '}
+                    {item.discountedPrice}
+                  </Subtitle>
+                </TextBox>
+              </Card>
+            ))}
+          </Row>
 
           <Separator val={1} />
 
@@ -835,26 +905,28 @@ export default function HomeScreen() {
 
           <Separator val={1} />
 
-          <SwiperContainer>
-            <SlideImage source={Images.demo9Image} />
-          </SwiperContainer>
+          <SwiperContainer2>
+            <SlideImage source={Images.demo9Image}/>
+          </SwiperContainer2>
 
           <Separator val={1} />
 
-          <SwiperContainer>
-            <SlideImage source={Images.demo10Image} />
-          </SwiperContainer>
+          <SwiperContainer3>
+            <SlideImage source={Images.demo10Image}/>
+          </SwiperContainer3>
 
           <Separator val={1} />
 
-          <SwiperContainer>
+          <SwiperContainer4>
             <SlideImage source={Images.demo11Image} />
-          </SwiperContainer>
+          </SwiperContainer4>
 
           <Separator val={1} />
 
           <SwiperContainer>
-            <SlideImage1 source={Images.demo12Image} resizeMode='contain' style={styles.image3Style}/>
+            <SlideImage
+              source={Images.demo12Image}
+            />
           </SwiperContainer>
 
           <Separator val={1} />
@@ -975,9 +1047,11 @@ export default function HomeScreen() {
 
           <Separator val={1} />
 
-          <SwiperContainer1>
-            <SlideImage1 source={Images.demo18Image} resizeMode='contain' style={styles.image4Style} />
-          </SwiperContainer1>
+          <SwiperContainer2>
+            <SlideImage
+              source={Images.demo18Image}
+            />
+          </SwiperContainer2>
         </ScrollView>
       </SafeAreaContainerView>
     </Container>
