@@ -34,6 +34,11 @@ const Images = {
   deliveredIcon: require('../../assets/Images/Delivered.png'),
   bellIcon: require('../../assets/Images/Bell.png'),
   scannerIcon: require('../../assets/Images/Scanner.png'),
+  calendarIcon: require('../../assets/Images/Calendar.png'),
+  scanIcon: require('../../assets/Images/Scan.png'),
+  shareIcon: require('../../assets/Images/Share.png'),
+  leftArrowIcon: require('../../assets/Images/LeftArrow.png'),
+  rightArrow1Icon: require('../../assets/Images/RightArrow1.png'),
 
   // Static Images
   staticImage: require('../../assets/Images/static.jpg'),

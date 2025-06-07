@@ -11,7 +11,6 @@ export const HeaderContainer = styled.View`
   border-bottom-right-radius: ${Responsive.widthPercentageToDP(5)}px;
 `;
 
-
 export const HeaderTopContainer = styled.View`
   flex-direction: row;
   align-items: center;
@@ -67,15 +66,13 @@ export const RightIcon = styled.Image`
 `;
 
 export const IconButton = styled.TouchableOpacity`
-  width: 40px;
-  height: 40px;
-  background-color: #fff;
-  border-radius: 20px;
+  width: ${Responsive.widthPercentageToDP(10)}px;
+  height: ${Responsive.widthPercentageToDP(10)}px;
+  background-color: ${Colors.white};
+  border-radius: ${Responsive.widthPercentageToDP(10)}px;
   justify-content: center;
   align-items: center;
-  margin-left: 10px;
 `;
-
 
 export const Container = styled.View`
   flex-direction: row;
@@ -140,7 +137,7 @@ export const FastForwardImage = styled.Image`
 `;
 
 export const ImageContainer = styled.View`
-  padding: ${Responsive.widthPercentageToDP(4)}px;
+  padding-horizontal: ${Responsive.widthPercentageToDP(4)}px;
 `;
 
 export const BannerImages1 = styled.Image`
@@ -173,25 +170,36 @@ export const PercentImage = styled.Image`
 export const TopOffersRow = styled.View`
   flex-direction: row;
   justify-content: space-between;
-  padding: ${Responsive.heightPercentageToDP(2)}px;
+  padding-horizontal: ${Responsive.heightPercentageToDP(2)}px;
+  gap: ${Responsive.widthPercentageToDP(2)}px;
 `;
 
 export const OfferCard = styled.View`
-  width: 30%;
-  background-color: ${Colors.white};
+  flex: 1;
+  aspect-ratio: 0.7;
   border-radius: ${Responsive.widthPercentageToDP(2)}px;
-  overflow: hidden;
-  elevation: 3;
+  /* overflow: hidden; */
+  background-color: ${Colors.white};
+  /* elevation: 3; */
+  border-color: ${Colors.orange};
+  border-width: ${Responsive.widthPercentageToDP(0.5)}px;
+  position: relative;
 `;
 
 export const OfferImage = styled.Image`
   width: 100%;
-  height: ${Responsive.heightPercentageToDP(15)}px;
+  height: 100%;
+  border-radius: ${Responsive.widthPercentageToDP(2)}px;
 `;
 
 export const OfferBottomOverlay = styled.View`
-  background-color: ${Colors.redED2};
-  padding: ${Responsive.heightPercentageToDP(0.5)}px;
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  background-color: ${Colors.redED22};
+  padding-vertical: ${Responsive.heightPercentageToDP(1)}px;
+  border-bottom-left-radius: ${Responsive.widthPercentageToDP(2)}px;
+  border-bottom-right-radius: ${Responsive.widthPercentageToDP(2)}px;
   align-items: center;
 `;
 
@@ -216,7 +224,7 @@ export const HeaderRow = styled.View`
 export const Card = styled.View`
   border-radius: ${Responsive.widthPercentageToDP(3)}px;
   overflow: hidden;
-  elevation: 3;
+  /* elevation: 3; */
 `;
 
 export const ImageWrapper = styled.View`
@@ -234,7 +242,8 @@ export const OfferBadge = styled.View`
   top: 12px;
   left: 12px;
   background-color: #fff;
-  padding: ${Responsive.widthPercentageToDP(1)}px ${Responsive.widthPercentageToDP(2)}px;
+  padding: ${Responsive.widthPercentageToDP(1)}px
+    ${Responsive.widthPercentageToDP(2)}px;
   border-radius: ${Responsive.widthPercentageToDP(1)}px;
   flex-direction: row;
   align-items: center;

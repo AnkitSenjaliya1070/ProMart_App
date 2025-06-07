@@ -27,6 +27,7 @@
 		A2C95ACED37B4437AD8AA718 /* Poppins-Black.ttf in Resources */ = {isa = PBXBuildFile; fileRef = A6F15760B60943C6A0BC011F /* Poppins-Black.ttf */; };
 		B8F4596CED6D441C80204FFB /* Poppins-Italic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 0EDC1C041B9A4F0E9E2F6FE8 /* Poppins-Italic.ttf */; };
 		BC1182ECF5DB4A4A8BCC8066 /* Poppins-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = CBD9AE49594B4C589FFA7949 /* Poppins-Bold.ttf */; };
+		C6AF5CB52DA26F176DE912E0 /* PrivacyInfo.xcprivacy in Resources */ = {isa = PBXBuildFile; fileRef = 13B07FB81A68108700A75B9A /* PrivacyInfo.xcprivacy */; };
 		DA65E049522A433DB7A9A30B /* Poppins-ExtraLightItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = AAA95D68520B4221B1A805A5 /* Poppins-ExtraLightItalic.ttf */; };
 		F65D9BB53537494B996CBA37 /* Poppins-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 8B9398DCB0D9463FA848DA5B /* Poppins-Regular.ttf */; };
 /* End PBXBuildFile section */
@@ -239,6 +240,7 @@
 				90359F5BEC49432D822A9809 /* Poppins-SemiBoldItalic.ttf in Resources */,
 				94A6AA904B384E1D8E6666AF /* Poppins-Thin.ttf in Resources */,
 				0A7E3F3944D3458094C34963 /* Poppins-ThinItalic.ttf in Resources */,
+				C6AF5CB52DA26F176DE912E0 /* PrivacyInfo.xcprivacy in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -269,13 +271,9 @@
 			inputFileListPaths = (
 				"${PODS_ROOT}/Target Support Files/Pods-ProMart/Pods-ProMart-frameworks-${CONFIGURATION}-input-files.xcfilelist",
 			);
-			inputPaths = (
-			);
 			name = "[CP] Embed Pods Frameworks";
 			outputFileListPaths = (
 				"${PODS_ROOT}/Target Support Files/Pods-ProMart/Pods-ProMart-frameworks-${CONFIGURATION}-output-files.xcfilelist",
-			);
-			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -312,13 +310,9 @@
 			inputFileListPaths = (
 				"${PODS_ROOT}/Target Support Files/Pods-ProMart/Pods-ProMart-resources-${CONFIGURATION}-input-files.xcfilelist",
 			);
-			inputPaths = (
-			);
 			name = "[CP] Copy Pods Resources";
 			outputFileListPaths = (
 				"${PODS_ROOT}/Target Support Files/Pods-ProMart/Pods-ProMart-resources-${CONFIGURATION}-output-files.xcfilelist",
-			);
-			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -462,7 +456,10 @@
 					"-DFOLLY_CFG_NO_COROUTINES=1",
 					"-DFOLLY_HAVE_CLOCK_GETTIME=1",
 				);
-				OTHER_LDFLAGS = "$(inherited)  ";
+				OTHER_LDFLAGS = (
+					"$(inherited)",
+					" ",
+				);
 				REACT_NATIVE_PATH = "${PODS_ROOT}/../../node_modules/react-native";
 				SDKROOT = iphoneos;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited) DEBUG";
@@ -531,7 +528,10 @@
 					"-DFOLLY_CFG_NO_COROUTINES=1",
 					"-DFOLLY_HAVE_CLOCK_GETTIME=1",
 				);
-				OTHER_LDFLAGS = "$(inherited)  ";
+				OTHER_LDFLAGS = (
+					"$(inherited)",
+					" ",
+				);
 				REACT_NATIVE_PATH = "${PODS_ROOT}/../../node_modules/react-native";
 				SDKROOT = iphoneos;
 				USE_HERMES = true;

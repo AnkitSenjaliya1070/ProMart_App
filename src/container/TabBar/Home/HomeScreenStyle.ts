@@ -125,7 +125,6 @@ export const MainCatView = styled.View`
 `;
 
 export const MainCatViewRow = styled.View`
-  padding-bottom: ${Responsive.heightPercentageToDP(2)}px;
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
@@ -276,8 +275,9 @@ export const FashionCardTitle = styled.Text`
 `;
 
 export const CarouselWrapper = styled.View`
-  padding-horizontal: ${Responsive.widthPercentageToDP(3)}px;
-  margin-bottom: ${Responsive.heightPercentageToDP(3)}px;
+  width: 100%;
+  background-color: transparent;
+  align-items: center;
 `;
 
 export const ImageContainer = styled.View`
@@ -341,26 +341,37 @@ export const ProductImage = styled.Image`
 
 export const Row = styled.View`
   flex-direction: row;
-  flex-wrap: nowrap;
+  /* flex-wrap: nowrap; */
   justify-content: space-between;
   padding-horizontal: ${Responsive.widthPercentageToDP(4)}px;
 `;
 
 export const Card = styled.TouchableOpacity`
   width: ${Responsive.widthPercentageToDP(23)}px;
-  height: ${Responsive.widthPercentageToDP(26)}px;
+  height: ${Responsive.widthPercentageToDP(27)}px;
+`;
+
+export const CardImageContainer = styled.View`
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  position: relative;
 `;
 
 export const StyledImage = styled.Image`
-  width: ${Responsive.widthPercentageToDP(23)}px;
-  height: ${Responsive.widthPercentageToDP(26)}px;
+  width: 100%;
+  height: 100%;
 `;
 
 export const TextBox = styled.View`
-  background-color: ${Colors.white};
-  padding: ${Responsive.widthPercentageToDP(1)}px;
+position: absolute;
+  bottom: 5;
+  left: 5;
+  right: 5;
+  background-color: ${Colors.whiteFF};
+  padding-vertical: ${Responsive.widthPercentageToDP(1)}px;
+  border-radius: ${Responsive.widthPercentageToDP(0.5)}px;
   align-items: center;
-  z-index: 10;
 `;
 
 export const Title = styled.Text`
@@ -370,24 +381,69 @@ export const Title = styled.Text`
 `;
 
 export const Subtitle = styled.Text`
-  font-size: ${Responsive.convertFontScale(8)}px;
+  font-size: ${Responsive.convertFontScale(5)}px;
   margin-top: ${Responsive.widthPercentageToDP(0.5)}px;
 `;
 
 export const Strike = styled.Text`
-font-size: ${Responsive.convertFontScale(8)}px;
+  font-size: ${Responsive.convertFontScale(5)}px;
   text-decoration: line-through;
 `;
 
 export const ScrollContainer = styled.ScrollView`
   padding: ${Responsive.widthPercentageToDP(4)}px;
+  margin-right: ${Responsive.widthPercentageToDP(4)}px;
   flex-direction: row;
 `;
 
 export const BannerImage = styled.Image`
-  width: ${Responsive.widthPercentageToDP(65)}px;
-  height: ${Responsive.widthPercentageToDP(40)}px;
+  width: ${Responsive.widthPercentageToDP(70)}px;
+  height: ${Responsive.widthPercentageToDP(45)}px;
   margin-right: ${Responsive.widthPercentageToDP(1)}px;
+`;
+
+export const CarouselImageCard = styled.View`
+  background-color: ${Colors.white};
+  width: ${Responsive.widthPercentageToDP(84)}px;
+  border-bottom-left-radius: ${Responsive.widthPercentageToDP(2)}px;
+  border-bottom-right-radius: ${Responsive.widthPercentageToDP(2)}px;
+  overflow: hidden;
+  /* elevation: 3;
+  shadow-color: #000;
+  shadow-offset: 0px 2px;
+  shadow-opacity: 0.2;
+  shadow-radius: 4px; */
+  border-width: ${Responsive.widthPercentageToDP(0.3)}px;
+  border-color: ${Colors.grayD5};
+  margin-horizontal: ${Responsive.widthPercentageToDP(4)}px;
+`;
+
+export const ImageWrapper = styled.View`
+  position: relative;
+  height: ${Responsive.heightPercentageToDP(25)}px;
+`;
+
+export const CarouselImage = styled.Image`
+  width: 100%;
+  height: 100%;
+`;
+
+export const BottomRow = styled.View`
+flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  padding: ${Responsive.widthPercentageToDP(3)}px ${Responsive.widthPercentageToDP(3)}px;
+`;
+
+export const PriceText = styled.Text`
+  font-size: 16px;
+  font-weight: bold;
+  color: ${Colors.black};
+`;
+
+export const RightArrowIcon = styled.Image`
+  width: ${Responsive.widthPercentageToDP(4)}px;
+  height: ${Responsive.widthPercentageToDP(4)}px;
 `;
 
 export const styles = StyleSheet.create({

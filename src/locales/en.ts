@@ -63,4 +63,12 @@ export default {
     PM62: 'Brand',
     PM63: 'Color',
     PM64: 'View Less',
+    PM65: 'Select Location',
+    PM66: 'Your Location',
+    PM67: 'Confirm',
+    PM68: 'Seach Location Here',
+    PM69: 'Call Customer',
+    PM70: 'Delivered',
+    PM71: 'Sponsored',
+    PM72: 'From',
 };

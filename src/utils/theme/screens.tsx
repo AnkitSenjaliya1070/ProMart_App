@@ -4,4 +4,7 @@ export default {
     ProductScreen: 'ProductScreen',
     ProductDetailsScreen: 'ProductDetailsScreen',
     OrderPlaceScreen: 'OrderPlaceScreen',
+    QRScannerScreen: 'QRScannerScreen',
+    SelectLocationScreen: 'SelectLocationScreen',
+    DeliveryTrackingScreen: 'DeliveryTrackingScreen',
 };

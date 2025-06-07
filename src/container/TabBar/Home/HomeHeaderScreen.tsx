@@ -10,15 +10,19 @@ import {
   styles,
   TopRow,
 } from './HomeHeaderScreenStyle';
-import {Colors, Fonts, Images} from '../../../utils/theme';
+import {Colors, Fonts, Images, Screens} from '../../../utils/theme';
 import TextInputView from '../../../components/TextInputView/TextInputView';
 import CommonStyles, {
   Separator,
   SubTextBlack,
 } from '../../../utils/theme/commonStyle';
 import {localize} from '../../../functions/commonFunctions';
+import {ParamListBase, useNavigation} from '@react-navigation/native';
+import {NativeStackNavigationProp} from '@react-navigation/native-stack';
 
 export default function HomeHeaderScreen() {
+  const navigation = useNavigation<NativeStackNavigationProp<ParamListBase>>();
+
   return (
     <HeaderContainer>
       <TopRow>
@@ -26,7 +30,10 @@ export default function HomeHeaderScreen() {
           <Logo source={Images.proMartLogo} />
         </LogoWrapper>
 
-        <LogoWrapperNearMe>
+        <LogoWrapperNearMe
+          // onPress={() => navigation.navigate(Screens.SelectLocationScreen)}
+          onPress={() => navigation.navigate(Screens.DeliveryTrackingScreen)}
+          >
           <Logo source={Images.nearByImage} />
         </LogoWrapperNearMe>
       </TopRow>

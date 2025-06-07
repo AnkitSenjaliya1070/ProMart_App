@@ -47,6 +47,14 @@ const Colors = {
   redFD: '#FDC3C4',
   redED2: '#ED2225',
   grayEF: '#EFEBEB',
+  black1E: '#1E1E1E',
+  gray9D: '#9D9D9D',
+  gray34: '#343434',
+  whiteFF: '#FFFFFFCC',
+  grayD5: '#D5D5D5',
+  redED22: '#ED222566',
+  orange: '#F5863447',
+  grayD9: '#D9D9D9',
 };
 
 export default Colors;

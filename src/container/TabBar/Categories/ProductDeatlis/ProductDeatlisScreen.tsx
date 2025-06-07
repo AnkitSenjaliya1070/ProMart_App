@@ -22,7 +22,6 @@ import {
   MoreButton,
   OfferImage,
   PriceRow,
-  ProductImage,
   QuantitySelector,
   RatingRow,
   RatingText,
@@ -48,9 +47,10 @@ import CommonStyles, {
 } from '../../../../utils/theme/commonStyle';
 import TextInputView from '../../../../components/TextInputView/TextInputView';
 import {localize} from '../../../../functions/commonFunctions';
-import {Colors, Fonts, Images, Screens} from '../../../../utils/theme';
+import {Colors, Fonts, Images} from '../../../../utils/theme';
 import {ParamListBase, useNavigation} from '@react-navigation/native';
 import {NativeStackNavigationProp} from '@react-navigation/native-stack';
+import ProductImageCarousel from '../../../../components/ProductImageCarousel/ProductImageCarousel';
 
 const specifications = [
   {label: 'Colour', value: 'Black'},
@@ -123,7 +123,13 @@ export default function ProductDetailsScreen({route}: any) {
             Galaxy S24 Ultra Dual SIM Titanium Gray 12GB RAM 256 5G -MIddle East
             Version
           </SubTextBlack>
-          <ProductImage source={product.image} resizeMode="contain" />
+          {/* <ProductImage source={product.image} resizeMode="contain" /> */}
+
+          <ProductImageCarousel
+            images={[Images.demo3Image, Images.demo4Image, Images.demo5Image, Images.demo4Image, Images.demo7Image]}
+          />
+
+          <Separator val={2} />
 
           <ItemSeparator />
           <Row>

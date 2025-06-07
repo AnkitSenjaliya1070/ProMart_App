@@ -2,42 +2,42 @@ import React from 'react';
 import {FlatList, ScrollView, View} from 'react-native';
 import {
   BannerImage,
+  BottomRow,
   Card,
+  CardImageContainer,
+  CarouselImage,
+  CarouselImageCard,
+  CarouselWrapper,
   CategoryCard,
   CategoryGridContainer,
   CategoryImage,
   CategoryImage1,
   CategoryImageRow,
   CategoryItem,
-  CategoryText,
-  CategoryTitle,
   CategoryWrapper,
-  CatHeading,
   Container,
   DealBottomRow,
   DealCard,
-  DealDiscount,
   DealFinalPrice,
   DealImage,
   DealOriginalPrice,
   DealPriceRow,
-  DealTitle,
   FashionCard,
   FashionCardImage,
-  FashionCardTitle,
   GroceryGridContainer,
   GroceryImage,
   GroceryItem,
-  GroceryLabel,
   ImageContainer,
+  ImageWrapper,
   MainCatView,
   MainCatViewRow,
-  MainLabel,
   PaddingView,
+  PriceText,
   ProductCard,
   ProductImage,
   ProductsWrapper,
   PromoCard,
+  RightArrowIcon,
   RightArrowImage,
   Row,
   ScrollContainer,
@@ -56,20 +56,20 @@ import {
   SwiperContainer3,
   SwiperContainer4,
   TextBox,
-  Title,
   ViewAllButton,
-  ViewAllText,
   VisualCard,
   VisualCardImage,
-  VisualCardSubtitle,
-  VisualCardTitle,
 } from './HomeScreenStyle';
 import HomeHeaderScreen from './HomeHeaderScreen';
 import SafeAreaContainerView from '../../../components/SafeAreaContainerView/SafeAreaContainerView';
-import CommonStyles, {Separator} from '../../../utils/theme/commonStyle';
-import {Colors, Images} from '../../../utils/theme';
+import CommonStyles, {
+  Separator,
+  SubTextBlack,
+} from '../../../utils/theme/commonStyle';
+import {Colors, Fonts, Images, Responsive} from '../../../utils/theme';
 import Swiper from 'react-native-swiper';
 import {localize} from '../../../functions/commonFunctions';
+import Carousel from 'react-native-reanimated-carousel';
 
 const images = [
   'https://picsum.photos/id/1018/600/400',
@@ -467,12 +467,32 @@ const promoImages = [
   Images.demo8Image,
 ];
 
+const carouselData = [
+  {
+    id: '1',
+    image: Images.demo7Image,
+    price: '$1499',
+  },
+  {
+    id: '2',
+    image: Images.demo7Image,
+    price: '$1299',
+  },
+];
+
 export default function HomeScreen() {
   const renderTopDealItem = ({item}: any) => (
     <DealCard>
       <DealImage source={item.image} resizeMode="cover" />
       <PaddingView>
-        <DealTitle numberOfLines={2}>{item.title}</DealTitle>
+        <SubTextBlack
+          size={12}
+          color={Colors.black}
+          fontFamily={Fonts.ThemeRegular}
+          fontWeight={400}
+          numberOfLines={2}>
+          {item.title}
+        </SubTextBlack>
         <DealPriceRow>
           <DealOriginalPrice>${item.originalPrice}</DealOriginalPrice>
           <DealFinalPrice>${item.finalPrice}</DealFinalPrice>
@@ -485,7 +505,13 @@ export default function HomeScreen() {
             <Stars source={Images.starIcon} />
             <Stars source={Images.starIcon} />
           </StarView>
-          <DealDiscount>{item.discount}</DealDiscount>
+          <SubTextBlack
+            size={12}
+            color={Colors.black}
+            fontFamily={Fonts.ThemeRegular}
+            fontWeight={400}>
+            {item.discount}
+          </SubTextBlack>
         </DealBottomRow>
       </PaddingView>
     </DealCard>
@@ -494,58 +520,159 @@ export default function HomeScreen() {
   const renderVisualCardItem = ({item}: any) => (
     <VisualCard>
       <VisualCardImage source={item.image} resizeMode="cover" />
-      <VisualCardTitle numberOfLines={1}>{item.title}</VisualCardTitle>
-      <VisualCardSubtitle>From ${item.finalPrice}</VisualCardSubtitle>
+      <Separator val={0.5}/>
+      <SubTextBlack
+        size={8}
+        color={Colors.black}
+        fontFamily={Fonts.ThemeRegular}
+        fontWeight={500}
+        numberOfLines={1}
+        style={CommonStyles.centerText}>
+        {item.title}
+      </SubTextBlack>
+      <SubTextBlack
+        size={8}
+        color={Colors.black}
+        fontFamily={Fonts.ThemeRegular}
+        fontWeight={500}
+        style={CommonStyles.centerText}>
+        From ${item.finalPrice}
+      </SubTextBlack>
     </VisualCard>
   );
 
   const renderWomenFashionItem = ({item}: any) => (
     <FashionCard>
       <FashionCardImage source={item.image} resizeMode="cover" />
-      <FashionCardTitle numberOfLines={1}>{item.title}</FashionCardTitle>
+      <Separator val={0.4}/>
+      <SubTextBlack
+        size={10}
+        color={Colors.black}
+        fontFamily={Fonts.ThemeRegular}
+        fontWeight={400}
+        style={CommonStyles.centerText}
+        numberOfLines={1}>
+        {item.title}
+      </SubTextBlack>
+      <Separator val={0.4}/>
     </FashionCard>
   );
 
   const renderMenFashionItem = ({item}: any) => (
     <FashionCard>
       <FashionCardImage source={item.image} resizeMode="cover" />
-      <FashionCardTitle numberOfLines={1}>{item.title}</FashionCardTitle>
+      <Separator val={0.4}/>
+      <SubTextBlack
+        size={10}
+        color={Colors.black}
+        fontFamily={Fonts.ThemeRegular}
+        fontWeight={400}
+        style={CommonStyles.centerText}
+        numberOfLines={1}>
+        {item.title}
+      </SubTextBlack>{' '}
+      <Separator val={0.4}/>
     </FashionCard>
   );
 
   const renderKidFashionItem = ({item}: any) => (
     <FashionCard>
       <FashionCardImage source={item.image} resizeMode="cover" />
-      <FashionCardTitle numberOfLines={1}>{item.title}</FashionCardTitle>
+      <Separator val={0.4}/>
+      <SubTextBlack
+        size={10}
+        color={Colors.black}
+        fontFamily={Fonts.ThemeRegular}
+        fontWeight={400}
+        style={CommonStyles.centerText}
+        numberOfLines={1}>
+        {item.title}
+      </SubTextBlack>{' '}
+      <Separator val={0.4}/>
     </FashionCard>
   );
 
   const renderBeautyItem = ({item}: any) => (
     <FashionCard>
       <FashionCardImage source={item.image} resizeMode="cover" />
-      <FashionCardTitle numberOfLines={1}>{item.title}</FashionCardTitle>
+      <Separator val={0.4}/>
+      <SubTextBlack
+        size={10}
+        color={Colors.black}
+        fontFamily={Fonts.ThemeRegular}
+        fontWeight={400}
+        style={CommonStyles.centerText}
+        numberOfLines={1}>
+        {item.title}
+      </SubTextBlack>{' '}
+      <Separator val={0.4}/>
     </FashionCard>
   );
 
   const renderGymCollectionItem = ({item}: any) => (
     <FashionCard>
       <FashionCardImage source={item.image} resizeMode="cover" />
-      <FashionCardTitle numberOfLines={1}>{item.title}</FashionCardTitle>
+      <Separator val={0.4}/>
+      <SubTextBlack
+        size={10}
+        color={Colors.black}
+        fontFamily={Fonts.ThemeRegular}
+        fontWeight={400}
+        style={CommonStyles.centerText}
+        numberOfLines={1}>
+        {item.title}
+      </SubTextBlack>{' '}
+      <Separator val={0.4}/>
     </FashionCard>
   );
 
   const renderFurnitureItem = ({item}: any) => (
     <FashionCard>
       <FashionCardImage source={item.image} resizeMode="cover" />
-      <FashionCardTitle numberOfLines={1}>{item.title}</FashionCardTitle>
+      <Separator val={0.4}/>
+      <SubTextBlack
+        size={10}
+        color={Colors.black}
+        fontFamily={Fonts.ThemeRegular}
+        fontWeight={400}
+        style={CommonStyles.centerText}
+        numberOfLines={1}>
+        {item.title}
+      </SubTextBlack>{' '}
+      <Separator val={0.4}/>
     </FashionCard>
   );
 
   const renderJewellryItem = ({item}: any) => (
     <FashionCard>
       <FashionCardImage source={item.image} resizeMode="cover" />
-      <FashionCardTitle numberOfLines={2}>{item.title}</FashionCardTitle>
+      <Separator val={0.4}/>
+      <SubTextBlack
+        size={10}
+        color={Colors.black}
+        fontFamily={Fonts.ThemeRegular}
+        fontWeight={400}
+        style={CommonStyles.centerText}
+        numberOfLines={2}>
+        {item.title}
+      </SubTextBlack>{' '}
+      <Separator val={0.4}/>
     </FashionCard>
+  );
+
+  // eslint-disable-next-line react/no-unstable-nested-components
+  const CarouselrenderItem = ({item}: any) => (
+    <CarouselImageCard>
+      <ImageWrapper>
+        <CarouselImage source={item.image} resizeMode="cover" />
+      </ImageWrapper>
+      <BottomRow>
+        <PriceText>
+          {localize('PM72')} {item.price}
+        </PriceText>
+        <RightArrowIcon source={Images.rightArrowIcon} resizeMode="contain" />
+      </BottomRow>
+    </CarouselImageCard>
   );
 
   return (
@@ -574,8 +701,6 @@ export default function HomeScreen() {
             ))}
           </Swiper>
 
-          {/* <Separator val={0.5} /> */}
-
           {/* Category Grid Section */}
           <CategoryGridContainer>
             {categories.map((cat, index) => (
@@ -588,11 +713,16 @@ export default function HomeScreen() {
                   <CategoryImage source={cat.images[0]} />
                   <CategoryImage source={cat.images[0]} />
                 </CategoryImageRow>
-                <CategoryTitle>{cat.title}</CategoryTitle>
+                <SubTextBlack
+                  size={8}
+                  color={Colors.black}
+                  // fontFamily={Fonts.ThemeRegular}
+                  fontWeight={500}>
+                  {cat.title}
+                </SubTextBlack>
               </CategoryCard>
             ))}
           </CategoryGridContainer>
-
           <Separator val={0.5} />
 
           <SwiperContainer1>
@@ -601,14 +731,31 @@ export default function HomeScreen() {
               style={styles.image2Style}
             />
 
+            <Separator val={1} />
             {/* Grocery Shopping */}
             <View>
-              <MainLabel>{localize('PM3')}</MainLabel>
+              <SubTextBlack
+                size={18}
+                color={Colors.black}
+                fontFamily={Fonts.ThemeRegular}
+                fontWeight={700}>
+                {localize('PM3')}
+              </SubTextBlack>
+              <Separator val={1} />
               <GroceryGridContainer>
                 {groceryItems.map((item, index) => (
                   <GroceryItem key={index}>
                     <GroceryImage source={item.image} />
-                    <GroceryLabel numberOfLines={1}>{item.label}</GroceryLabel>
+                    <Separator val={0.5} />
+
+                    <SubTextBlack
+                      size={10}
+                      color={Colors.black}
+                      fontFamily={Fonts.ThemeRegular}
+                      fontWeight={500}
+                      numberOfLines={1}>
+                      {item.label}
+                    </SubTextBlack>
                   </GroceryItem>
                 ))}
               </GroceryGridContainer>
@@ -618,12 +765,27 @@ export default function HomeScreen() {
           {/* Top Deals in grocery */}
           <MainCatView>
             <MainCatViewRow>
-              <CatHeading>{localize('PM4')}</CatHeading>
+              <SubTextBlack
+                size={18}
+                color={Colors.black}
+                fontFamily={Fonts.ThemeMedium}
+                fontWeight={500}
+                numberOfLines={1}>
+                {localize('PM4')}
+              </SubTextBlack>
               <ViewAllButton onPress={() => {}}>
-                <ViewAllText>{localize('PM5')}</ViewAllText>
+                <SubTextBlack
+                  size={12}
+                  color={Colors.black}
+                  fontFamily={Fonts.ThemeRegular}
+                  fontWeight={400}>
+                  {localize('PM5')}
+                </SubTextBlack>
                 <RightArrowImage source={Images.rightArrowIcon} />
               </ViewAllButton>
             </MainCatViewRow>
+
+            <Separator val={0.5} />
 
             <FlatList
               horizontal
@@ -649,12 +811,26 @@ export default function HomeScreen() {
           {/* Recommended For you */}
           <MainCatView>
             <MainCatViewRow>
-              <CatHeading>{localize('PM6')}</CatHeading>
+              <SubTextBlack
+                size={18}
+                color={Colors.black}
+                fontFamily={Fonts.ThemeMedium}
+                fontWeight={500}>
+                {localize('PM6')}
+              </SubTextBlack>
               <ViewAllButton onPress={() => {}}>
-                <ViewAllText>{localize('PM5')}</ViewAllText>
+                <SubTextBlack
+                  size={12}
+                  color={Colors.black}
+                  fontFamily={Fonts.ThemeRegular}
+                  fontWeight={400}>
+                  {localize('PM5')}
+                </SubTextBlack>
                 <RightArrowImage source={Images.rightArrowIcon} />
               </ViewAllButton>
             </MainCatViewRow>
+
+            <Separator val={0.5} />
 
             <FlatList
               horizontal
@@ -666,10 +842,10 @@ export default function HomeScreen() {
           </MainCatView>
 
           <ScrollContainer horizontal showsHorizontalScrollIndicator={false}>
-          {promoImages.map((img, index) => (
-            <BannerImage key={index} source={img} resizeMode="cover" />
-          ))}
-        </ScrollContainer>
+            {promoImages.map((img, index) => (
+              <BannerImage key={index} source={img} resizeMode="cover" />
+            ))}
+          </ScrollContainer>
 
           <MainCatView>
             <FlatList
@@ -686,14 +862,22 @@ export default function HomeScreen() {
           <Row>
             {data2.map(item => (
               <Card key={item.id}>
-                <StyledImage source={item.image}/>
-                <TextBox>
-                  <Title>{item.title}</Title>
-                  <Subtitle>
-                    FLAT <Strike>{item.originalPrice}</Strike>{' '}
-                    {item.discountedPrice}
-                  </Subtitle>
-                </TextBox>
+                <CardImageContainer>
+                  <StyledImage source={item.image} />
+                  <TextBox>
+                    <SubTextBlack
+                      size={8}
+                      color={Colors.black}
+                      // fontFamily={Fonts.ThemeRegular}
+                      fontWeight={500}>
+                      {item.title}
+                    </SubTextBlack>
+                    <Subtitle>
+                      FLAT <Strike>{item.originalPrice}</Strike>{' '}
+                      {item.discountedPrice}
+                    </Subtitle>
+                  </TextBox>
+                </CardImageContainer>
               </Card>
             ))}
           </Row>
@@ -703,12 +887,26 @@ export default function HomeScreen() {
           {/* Women's Fashion Item */}
           <MainCatView>
             <MainCatViewRow>
-              <CatHeading>{localize('PM7')}</CatHeading>
+              <SubTextBlack
+                size={16}
+                color={Colors.black}
+                fontFamily={Fonts.ThemeMedium}
+                fontWeight={500}>
+                {localize('PM7')}
+              </SubTextBlack>
               <ViewAllButton onPress={() => {}}>
-                <ViewAllText>{localize('PM5')}</ViewAllText>
+                <SubTextBlack
+                  size={12}
+                  color={Colors.black}
+                  fontFamily={Fonts.ThemeRegular}
+                  fontWeight={400}>
+                  {localize('PM5')}
+                </SubTextBlack>
                 <RightArrowImage source={Images.rightArrowIcon} />
               </ViewAllButton>
             </MainCatViewRow>
+
+            <Separator val={0.5} />
 
             <FlatList
               horizontal
@@ -725,12 +923,26 @@ export default function HomeScreen() {
           {/* Men's Fashion Item */}
           <MainCatView>
             <MainCatViewRow>
-              <CatHeading>{localize('PM8')}</CatHeading>
+              <SubTextBlack
+                size={16}
+                color={Colors.black}
+                fontFamily={Fonts.ThemeMedium}
+                fontWeight={500}>
+                {localize('PM8')}
+              </SubTextBlack>{' '}
               <ViewAllButton onPress={() => {}}>
-                <ViewAllText>{localize('PM5')}</ViewAllText>
+                <SubTextBlack
+                  size={12}
+                  color={Colors.black}
+                  fontFamily={Fonts.ThemeRegular}
+                  fontWeight={400}>
+                  {localize('PM5')}
+                </SubTextBlack>{' '}
                 <RightArrowImage source={Images.rightArrowIcon} />
               </ViewAllButton>
             </MainCatViewRow>
+
+            <Separator val={0.5} />
 
             <FlatList
               horizontal
@@ -747,12 +959,26 @@ export default function HomeScreen() {
           {/* Kid's Fashion Item */}
           <MainCatView>
             <MainCatViewRow>
-              <CatHeading>{localize('PM9')}</CatHeading>
+              <SubTextBlack
+                size={16}
+                color={Colors.black}
+                fontFamily={Fonts.ThemeMedium}
+                fontWeight={500}>
+                {localize('PM9')}
+              </SubTextBlack>{' '}
               <ViewAllButton onPress={() => {}}>
-                <ViewAllText>{localize('PM5')}</ViewAllText>
+                <SubTextBlack
+                  size={12}
+                  color={Colors.black}
+                  fontFamily={Fonts.ThemeRegular}
+                  fontWeight={400}>
+                  {localize('PM5')}
+                </SubTextBlack>{' '}
                 <RightArrowImage source={Images.rightArrowIcon} />
               </ViewAllButton>
             </MainCatViewRow>
+
+            <Separator val={0.5} />
 
             <FlatList
               horizontal
@@ -769,12 +995,26 @@ export default function HomeScreen() {
           {/* Beauty Item */}
           <MainCatView>
             <MainCatViewRow>
-              <CatHeading>{localize('PM10')}</CatHeading>
+              <SubTextBlack
+                size={16}
+                color={Colors.black}
+                fontFamily={Fonts.ThemeMedium}
+                fontWeight={500}>
+                {localize('PM10')}
+              </SubTextBlack>{' '}
               <ViewAllButton onPress={() => {}}>
-                <ViewAllText>{localize('PM5')}</ViewAllText>
+                <SubTextBlack
+                  size={12}
+                  color={Colors.black}
+                  fontFamily={Fonts.ThemeRegular}
+                  fontWeight={400}>
+                  {localize('PM5')}
+                </SubTextBlack>{' '}
                 <RightArrowImage source={Images.rightArrowIcon} />
               </ViewAllButton>
             </MainCatViewRow>
+
+            <Separator val={0.5} />
 
             <FlatList
               horizontal
@@ -785,6 +1025,54 @@ export default function HomeScreen() {
               scrollEnabled={false}
             />
           </MainCatView>
+
+          <Separator val={1.2} />
+
+          <MainCatView>
+            {/* <MainCatViewRow> */}
+            <SubTextBlack
+              size={18}
+              color={Colors.black}
+              // fontFamily={Fonts.ThemeRegular}
+              fontWeight={600}>
+              {localize('PM71')}
+            </SubTextBlack>
+            {/* </MainCatViewRow> */}
+          </MainCatView>
+
+          <CarouselWrapper>
+            {/* <Carousel
+                ref={carouselRef}
+                data={carouselData}
+                renderItem={CarouselrenderItem}
+                sliderWidth={Responsive.widthPercentageToDP('100')}
+                itemWidth={Responsive.widthPercentageToDP('85')}
+                inactiveSlideScale={0.95}
+                inactiveSlideOpacity={0.7}
+                loop={true}
+                autoplay={true}
+                autoplayDelay={500}
+                autoplayInterval={3000}
+                contentContainerCustomStyle={{paddingVertical: 10}}
+              /> */}
+
+            <Carousel
+              width={Responsive.widthPercentageToDP('92')}
+              height={Responsive.heightPercentageToDP('30')}
+              autoPlay={true}
+              data={carouselData}
+              scrollAnimationDuration={1000}
+              renderItem={CarouselrenderItem}
+              style={CommonStyles.centerItem}
+              mode="parallax"
+              loop
+              modeConfig={{
+                parallaxScrollingScale: 0.9,
+                parallaxScrollingOffset: 60,
+                parallaxAdjacentItemScale: 0.8,
+              }}
+            />
+          </CarouselWrapper>
 
           <Separator val={1} />
 
@@ -797,12 +1085,26 @@ export default function HomeScreen() {
           {/* Gym collection*/}
           <MainCatView>
             <MainCatViewRow>
-              <CatHeading>{localize('PM11')}</CatHeading>
+              <SubTextBlack
+                size={16}
+                color={Colors.black}
+                fontFamily={Fonts.ThemeMedium}
+                fontWeight={500}>
+                {localize('PM11')}
+              </SubTextBlack>
               <ViewAllButton onPress={() => {}}>
-                <ViewAllText>{localize('PM5')}</ViewAllText>
+                <SubTextBlack
+                  size={12}
+                  color={Colors.black}
+                  fontFamily={Fonts.ThemeRegular}
+                  fontWeight={400}>
+                  {localize('PM5')}
+                </SubTextBlack>{' '}
                 <RightArrowImage source={Images.rightArrowIcon} />
               </ViewAllButton>
             </MainCatViewRow>
+
+            <Separator val={0.5} />
 
             <FlatList
               horizontal
@@ -819,12 +1121,26 @@ export default function HomeScreen() {
           {/* Furniture Items*/}
           <MainCatView>
             <MainCatViewRow>
-              <CatHeading>{localize('PM12')}</CatHeading>
+              <SubTextBlack
+                size={16}
+                color={Colors.black}
+                fontFamily={Fonts.ThemeMedium}
+                fontWeight={500}>
+                {localize('PM12')}
+              </SubTextBlack>{' '}
               <ViewAllButton onPress={() => {}}>
-                <ViewAllText>{localize('PM5')}</ViewAllText>
+                <SubTextBlack
+                  size={12}
+                  color={Colors.black}
+                  fontFamily={Fonts.ThemeRegular}
+                  fontWeight={400}>
+                  {localize('PM5')}
+                </SubTextBlack>{' '}
                 <RightArrowImage source={Images.rightArrowIcon} />
               </ViewAllButton>
             </MainCatViewRow>
+
+            <Separator val={0.5} />
 
             <FlatList
               horizontal
@@ -865,7 +1181,13 @@ export default function HomeScreen() {
             {categories1.map((item, index) => (
               <CategoryItem key={index}>
                 <CategoryImage1 source={item.image} />
-                <CategoryText>{item.name}</CategoryText>
+                <SubTextBlack
+                  size={8}
+                  color={Colors.black}
+                  fontFamily={Fonts.ThemeRegular}
+                  fontWeight={400}>
+                  {item.name}
+                </SubTextBlack>
               </CategoryItem>
             ))}
           </CategoryWrapper>
@@ -886,12 +1208,26 @@ export default function HomeScreen() {
           {/* Jewellry*/}
           <MainCatView>
             <MainCatViewRow>
-              <CatHeading>{localize('PM13')}</CatHeading>
+              <SubTextBlack
+                size={16}
+                color={Colors.black}
+                fontFamily={Fonts.ThemeMedium}
+                fontWeight={500}>
+                {localize('PM13')}
+              </SubTextBlack>{' '}
               <ViewAllButton onPress={() => {}}>
-                <ViewAllText>{localize('PM5')}</ViewAllText>
+                <SubTextBlack
+                  size={12}
+                  color={Colors.black}
+                  fontFamily={Fonts.ThemeRegular}
+                  fontWeight={400}>
+                  {localize('PM5')}
+                </SubTextBlack>{' '}
                 <RightArrowImage source={Images.rightArrowIcon} />
               </ViewAllButton>
             </MainCatViewRow>
+
+            <Separator val={0.5} />
 
             <FlatList
               horizontal
@@ -906,13 +1242,13 @@ export default function HomeScreen() {
           <Separator val={1} />
 
           <SwiperContainer2>
-            <SlideImage source={Images.demo9Image}/>
+            <SlideImage source={Images.demo9Image} />
           </SwiperContainer2>
 
           <Separator val={1} />
 
           <SwiperContainer3>
-            <SlideImage source={Images.demo10Image}/>
+            <SlideImage source={Images.demo10Image} />
           </SwiperContainer3>
 
           <Separator val={1} />
@@ -924,9 +1260,7 @@ export default function HomeScreen() {
           <Separator val={1} />
 
           <SwiperContainer>
-            <SlideImage
-              source={Images.demo12Image}
-            />
+            <SlideImage source={Images.demo12Image} />
           </SwiperContainer>
 
           <Separator val={1} />
@@ -943,12 +1277,26 @@ export default function HomeScreen() {
           {/*  Top Picks */}
           <MainCatView>
             <MainCatViewRow>
-              <CatHeading>{localize('PM14')}</CatHeading>
+              <SubTextBlack
+                size={16}
+                color={Colors.black}
+                fontFamily={Fonts.ThemeMedium}
+                fontWeight={500}>
+                {localize('PM14')}
+              </SubTextBlack>{' '}
               <ViewAllButton onPress={() => {}}>
-                <ViewAllText>{localize('PM5')}</ViewAllText>
+                <SubTextBlack
+                  size={12}
+                  color={Colors.black}
+                  fontFamily={Fonts.ThemeRegular}
+                  fontWeight={400}>
+                  {localize('PM5')}
+                </SubTextBlack>{' '}
                 <RightArrowImage source={Images.rightArrowIcon} />
               </ViewAllButton>
             </MainCatViewRow>
+
+            <Separator val={0.5} />
 
             <FlatList
               horizontal
@@ -964,12 +1312,26 @@ export default function HomeScreen() {
           {/*  Top toys collection */}
           <MainCatView>
             <MainCatViewRow>
-              <CatHeading>{localize('PM15')}</CatHeading>
+              <SubTextBlack
+                size={16}
+                color={Colors.black}
+                fontFamily={Fonts.ThemeMedium}
+                fontWeight={500}>
+                {localize('PM15')}
+              </SubTextBlack>{' '}
               <ViewAllButton onPress={() => {}}>
-                <ViewAllText>{localize('PM5')}</ViewAllText>
+                <SubTextBlack
+                  size={12}
+                  color={Colors.black}
+                  fontFamily={Fonts.ThemeRegular}
+                  fontWeight={400}>
+                  {localize('PM5')}
+                </SubTextBlack>{' '}
                 <RightArrowImage source={Images.rightArrowIcon} />
               </ViewAllButton>
             </MainCatViewRow>
+
+            <Separator val={0.5} />
 
             <FlatList
               horizontal
@@ -985,12 +1347,26 @@ export default function HomeScreen() {
           {/* Top Selling Books */}
           <MainCatView>
             <MainCatViewRow>
-              <CatHeading>{localize('PM16')}</CatHeading>
+              <SubTextBlack
+                size={16}
+                color={Colors.black}
+                fontFamily={Fonts.ThemeMedium}
+                fontWeight={500}>
+                {localize('PM16')}
+              </SubTextBlack>{' '}
               <ViewAllButton onPress={() => {}}>
-                <ViewAllText>{localize('PM5')}</ViewAllText>
+                <SubTextBlack
+                  size={12}
+                  color={Colors.black}
+                  fontFamily={Fonts.ThemeRegular}
+                  fontWeight={400}>
+                  {localize('PM5')}
+                </SubTextBlack>{' '}
                 <RightArrowImage source={Images.rightArrowIcon} />
               </ViewAllButton>
             </MainCatViewRow>
+
+            <Separator val={0.5} />
 
             <FlatList
               horizontal
@@ -1006,12 +1382,26 @@ export default function HomeScreen() {
           {/* Sports Items*/}
           <MainCatView>
             <MainCatViewRow>
-              <CatHeading>{localize('PM17')}</CatHeading>
+              <SubTextBlack
+                size={16}
+                color={Colors.black}
+                fontFamily={Fonts.ThemeMedium}
+                fontWeight={500}>
+                {localize('PM17')}
+              </SubTextBlack>{' '}
               <ViewAllButton onPress={() => {}}>
-                <ViewAllText>{localize('PM5')}</ViewAllText>
+                <SubTextBlack
+                  size={12}
+                  color={Colors.black}
+                  fontFamily={Fonts.ThemeRegular}
+                  fontWeight={400}>
+                  {localize('PM5')}
+                </SubTextBlack>{' '}
                 <RightArrowImage source={Images.rightArrowIcon} />
               </ViewAllButton>
             </MainCatViewRow>
+
+            <Separator val={0.5} />
 
             <FlatList
               horizontal
@@ -1028,12 +1418,26 @@ export default function HomeScreen() {
           {/* Health & Nutrition */}
           <MainCatView>
             <MainCatViewRow>
-              <CatHeading>{localize('PM18')}</CatHeading>
+              <SubTextBlack
+                size={16}
+                color={Colors.black}
+                fontFamily={Fonts.ThemeMedium}
+                fontWeight={500}>
+                {localize('PM18')}
+              </SubTextBlack>{' '}
               <ViewAllButton onPress={() => {}}>
-                <ViewAllText>{localize('PM5')}</ViewAllText>
+                <SubTextBlack
+                  size={12}
+                  color={Colors.black}
+                  fontFamily={Fonts.ThemeRegular}
+                  fontWeight={400}>
+                  {localize('PM5')}
+                </SubTextBlack>{' '}
                 <RightArrowImage source={Images.rightArrowIcon} />
               </ViewAllButton>
             </MainCatViewRow>
+
+            <Separator val={0.5} />
 
             <FlatList
               horizontal
@@ -1048,9 +1452,7 @@ export default function HomeScreen() {
           <Separator val={1} />
 
           <SwiperContainer2>
-            <SlideImage
-              source={Images.demo18Image}
-            />
+            <SlideImage source={Images.demo18Image} />
           </SwiperContainer2>
         </ScrollView>
       </SafeAreaContainerView>

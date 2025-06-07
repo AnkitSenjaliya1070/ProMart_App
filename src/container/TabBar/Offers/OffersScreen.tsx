@@ -52,9 +52,11 @@ import {
 } from './OffersScreenStyle';
 import TextInputView from '../../../components/TextInputView/TextInputView';
 import {localize} from '../../../functions/commonFunctions';
-import {Colors, Fonts, Images} from '../../../utils/theme';
+import {Colors, Fonts, Images, Screens} from '../../../utils/theme';
 import {FlatList, ScrollView, TouchableOpacity} from 'react-native';
 import StarRating from '../../../components/StarRating/StarRating';
+import {ParamListBase, useNavigation} from '@react-navigation/native';
+import {NativeStackNavigationProp} from '@react-navigation/native-stack';
 
 const iconData = [
   {name: 'PROMART', source: Images.demo3Image},
@@ -155,6 +157,8 @@ const offersNearYou = [
 ];
 
 export default function OffersScreen() {
+  const navigation = useNavigation<NativeStackNavigationProp<ParamListBase>>();
+
   const [wishlist, setWishlist] = useState<string[]>([]);
 
   const toggleWishlist = (id: string) => {
@@ -163,11 +167,10 @@ export default function OffersScreen() {
     );
   };
 
-  const renderCard = ({item}:any) => (
+  const renderCard = ({item}: any) => (
     <Card>
       <ImageWrapper>
         <OfferBadge>
-          {/* <Ionicon name="pricetag" size={16} color="#e60000" /> */}
           <SmallIconImage source={Images.tagIcon} resizeMode="cover" />
           <SeparatorH val={0.8} />
           <SubTextBlack
@@ -195,7 +198,7 @@ export default function OffersScreen() {
           <SubTextBlack
             size={16}
             color={Colors.black}
-            fontFamily={Fonts.ThemeRegular}
+            fontFamily={Fonts.ThemeMedium}
             fontWeight={500}>
             {item.title}
           </SubTextBlack>
@@ -203,7 +206,7 @@ export default function OffersScreen() {
           <SubTextBlack
             size={16}
             color={Colors.black}
-            fontFamily={Fonts.ThemeRegular}
+            fontFamily={Fonts.ThemeMedium}
             fontWeight={500}>
             {item.price}
           </SubTextBlack>
@@ -294,7 +297,10 @@ export default function OffersScreen() {
             <IconButton>
               <RightIcon source={Images.bellIcon} resizeMode="contain" />
             </IconButton>
-            <IconButton>
+            <SeparatorH val={1} />
+            <IconButton
+              // onPress={() => navigation.navigate(Screens.QRScannerScreen)}
+              >
               <RightIcon source={Images.scannerIcon} />
             </IconButton>
           </RightSection>
@@ -374,6 +380,7 @@ export default function OffersScreen() {
           ))}
         </Wrapper>
 
+        <Separator val={0.3} />
         <ImageContainer>
           <BannerImages1 source={Images.foundationImage} />
 
@@ -382,6 +389,7 @@ export default function OffersScreen() {
           <BannerImages2 source={Images.skinCareImage} />
         </ImageContainer>
 
+        <Separator val={1} />
         <SavingsContainer>
           <PercentImage source={Images.discountImage} />
 
@@ -390,7 +398,7 @@ export default function OffersScreen() {
           <SubTextBlack
             size={16}
             color={Colors.black}
-            fontFamily={Fonts.ThemeRegular}
+            // fontFamily={Fonts.ThemeRegular}
             fontWeight={600}>
             August Savings
           </SubTextBlack>
@@ -412,7 +420,7 @@ export default function OffersScreen() {
           <SubTextBlack
             size={16}
             color={Colors.black}
-            fontFamily={Fonts.ThemeRegular}
+            // fontFamily={Fonts.ThemeRegular}
             fontWeight={600}>
             {localize('PM58')}
           </SubTextBlack>
@@ -420,11 +428,13 @@ export default function OffersScreen() {
           <SubTextBlack
             size={14}
             color={Colors.redED2}
-            fontFamily={Fonts.ThemeRegular}
+            fontFamily={Fonts.ThemeMedium}
             fontWeight={500}>
             {localize('PM5')}
           </SubTextBlack>
         </SectionHeader>
+
+        <Separator val={0.5} />
 
         <TopOffersRow>
           {offers.slice(0, 3).map((item, index) => (
@@ -451,14 +461,14 @@ export default function OffersScreen() {
           ))}
         </TopOffersRow>
 
-        <Separator val={0.5} />
+        <Separator val={1} />
 
         <OfferContainer>
           <HeaderRow>
             <SubTextBlack
               size={16}
               color={Colors.black}
-              fontFamily={Fonts.ThemeRegular}
+              // fontFamily={Fonts.ThemeRegular}
               fontWeight={600}>
               {localize('PM59')}
             </SubTextBlack>
@@ -467,14 +477,14 @@ export default function OffersScreen() {
               <SubTextBlack
                 size={14}
                 color={Colors.redED2}
-                fontFamily={Fonts.ThemeRegular}
+                fontFamily={Fonts.ThemeMedium}
                 fontWeight={500}>
                 {localize('PM5')}
               </SubTextBlack>
             </TouchableOpacity>
           </HeaderRow>
 
-          <Separator val={0.8} />
+          <Separator val={0.5} />
 
           <FlatList
             data={offersNearYou}
